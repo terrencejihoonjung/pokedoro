@@ -30,8 +30,16 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Ruby wrapper or Pokemon API
+# Access ENV variables
+gem 'dotenv-rails'
+
+# Ruby wrapper for Pokemon API
 gem 'poke-api-v2'
+
+# Ruby wrapper for Pexels API
+gem 'pexels', '~> 0.5.0'
+
+gem "net-http"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
