@@ -1,5 +1,6 @@
 import { Box, Paper, Alert, Avatar, Button, Grid, TextField } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CatchingPokemon } from '@mui/icons-material';
 
 function SignupForm({ onLogin }) {
@@ -8,6 +9,8 @@ function SignupForm({ onLogin }) {
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [errors, setErrors] = useState([]);
+
+    const navigate = useNavigate();
 
     async function handleSignup(e) {
         e.preventDefault();
@@ -32,6 +35,7 @@ function SignupForm({ onLogin }) {
         const trainer = await response.json();
         if (response.ok) {
             onLogin(trainer)
+            navigate("/choose-pokemon")
         } else {
             setErrors(trainer.errors)
         }
@@ -66,7 +70,7 @@ function SignupForm({ onLogin }) {
                             required
                             fullWidth
                             value={username}
-                            onChange={e => setUsername[e.target.value]}
+                            onChange={e => setUsername(e.target.value)}
                         />
                     </Grid>
 
@@ -77,7 +81,7 @@ function SignupForm({ onLogin }) {
                             required
                             fullWidth
                             value={email}
-                            onChange={e => setEmail[e.target.value]}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </Grid>
 
@@ -88,7 +92,7 @@ function SignupForm({ onLogin }) {
                             required
                             fullWidth
                             value={password}
-                            onChange={e => setPassword[e.target.value]}
+                            onChange={e => setPassword(e.target.value)}
                         />
                     </Grid>
 
@@ -99,7 +103,7 @@ function SignupForm({ onLogin }) {
                             required
                             fullWidth
                             value={passwordConfirmation}
-                            onChange={e => setPasswordConfirmation[e.target.value]}
+                            onChange={e => setPasswordConfirmation(e.target.value)}
                         />
                     </Grid>
 

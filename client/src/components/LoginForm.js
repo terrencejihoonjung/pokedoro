@@ -1,11 +1,14 @@
 import { Box, Paper, Avatar, Button, Alert, Grid, TextField } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CatchingPokemon } from '@mui/icons-material';
 
 function LoginForm({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
+
+    const navigate = useNavigate();
 
     async function handleLogin(e) {
         e.preventDefault();
@@ -24,6 +27,7 @@ function LoginForm({ onLogin }) {
         const trainer = await response.json();
         if (response.ok) {
             onLogin(trainer)
+            navigate("/pokeboard")
         } else {
             setErrors(trainer.errors)
         }
@@ -59,7 +63,7 @@ function LoginForm({ onLogin }) {
                             required
                             fullWidth
                             value={username}
-                            onChange={e => setUsername[e.target.value]}
+                            onChange={e => setUsername(e.target.value)}
                         />
                     </Grid>
 
@@ -70,7 +74,7 @@ function LoginForm({ onLogin }) {
                             required
                             fullWidth
                             value={password}
-                            onChange={e => setPassword[e.target.value]}
+                            onChange={e => setPassword(e.target.value)}
                         />
                     </Grid>
 

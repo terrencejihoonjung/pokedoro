@@ -3,5 +3,5 @@ class Trainer < ApplicationRecord
 
     validates :username, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true
-    validates :bio, presence: true, length: { maxium: 300 }
+    validates :bio, length: { maximum: 300 }
 end
