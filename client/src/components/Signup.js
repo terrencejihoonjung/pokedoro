@@ -1,9 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import SignupForm from "./SignupForm";
 
-function Signup() {
-
-    
+function Signup({ onLogin }) {
 
     return (
         
@@ -35,7 +33,7 @@ function Signup() {
             
 
             {/* Sign up Form */}
-            <SignupForm />
+            <SignupForm onLogin={onLogin} />
 
         </Box>        
     )

@@ -28,23 +28,21 @@ function Home() {
     return (
         <Stack>
             <HomeBoxWhite>
-                    <Box sx={{mr: '30vw', mb: '20vh'}}>
-                        <Typography variant="h1" fontWeight="fontWeightBold" 
-                        sx={{textTransform: 'none', fontSize: 125}}
-                        >
-                            Pokédoro
-                        </Typography>
-                        <Typography variant="h6" fontWeight="fontWeightMedium"
-                            sx={{textTransform: 'none'}}
-                        >
-                            A new and fun approach to studying using the 
-                            <Box sx={{display: 'inline', color: 'thirdGreen.main'}}> pomodoro technique </Box> 
-                            integrated with 
-                            <Box sx={{display: 'inline', color: 'thirdRed.main'}}> pokémon</Box>. 
-                        </Typography>
-                    </Box>
-                    
-                
+                <Box sx={{mr: '30vw', mb: '20vh'}}>
+                    <Typography variant="h1" fontWeight="fontWeightBold" 
+                    sx={{textTransform: 'none', fontSize: 125}}
+                    >
+                        Pokédoro
+                    </Typography>
+                    <Typography variant="h6" fontWeight="fontWeightMedium"
+                        sx={{textTransform: 'none'}}
+                    >
+                        A new and fun approach to studying using the 
+                        <Box sx={{display: 'inline', color: 'thirdGreen.main'}}> pomodoro technique </Box> 
+                        integrated with 
+                        <Box sx={{display: 'inline', color: 'thirdRed.main'}}> pokémon</Box>. 
+                    </Typography>
+                </Box>
             </HomeBoxWhite>
 
             <HomeBoxBlack>

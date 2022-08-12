@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import LoginForm from "./LoginForm";
 
-function Login() {
+function Login({ onLogin }) {
 
     return (
         <Box sx={{
@@ -31,8 +31,8 @@ function Login() {
             </Box>
             
 
-            {/* Sign up Form */}
-            <LoginForm />
+            {/* Login Form */}
+            <LoginForm onLogin={onLogin} />
 
         </Box>      
         
