@@ -1,5 +1,5 @@
-import { Box, Button, Typography, Stack, styled } from "@mui/material";
-import { Add, Settings } from '@mui/icons-material';
+import { Box, Typography, Stack, styled } from "@mui/material";
+import {  } from '@mui/icons-material';
 
 function Home() {
 
