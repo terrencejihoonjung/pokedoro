@@ -1,6 +1,12 @@
 import { Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-function Profile({ onLogout }) {
+function Profile({ onLogout, hasPokemon }) {
+    const navigate = useNavigate();
+
+    if (!hasPokemon) {
+        navigate("/choose-pokemon")
+    }
 
     async function handleLogout() {
         const response = await fetch("/logout", {

@@ -1,10 +1,8 @@
 import { Box, Typography, Button, styled } from "@mui/material";
-import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import Message from "./Message";
+import TypeWriterEffect from 'react-typewriter-effect';
 
-function Dialog({ messages }) {
-    const [currentMessage, setCurrentMessage] = useState(0);
+function Dialog({ messages, handleNextMessage, currentMessage }) {
 
     const DialogBox = styled(Box) (({theme}) => ({
         border: 'solid ',
@@ -23,16 +21,8 @@ function Dialog({ messages }) {
         
     }));
 
-    function handleNextMessage() {
-        if (currentMessage < messages.length) {
-            setCurrentMessage(currentMessage + 1);
-        } else {
-            //navigate("/pokeboard")
-        }
-    }
-
     return (
-        <DialogBox>
+        <DialogBox onClick={handleNextMessage} >
             <Typography sx={{
                 fontSize: '1.1rem',
                 fontWeight: 'bold',
@@ -41,11 +31,17 @@ function Dialog({ messages }) {
                 Professor Pokédoro
             </Typography>
 
-            <Message message={messages[currentMessage]} key={currentMessage} />
+            <TypeWriterEffect
+                text={messages[currentMessage]}
+                cursorColor='#f7f7f7'
+                typeSpeed={30}
+                textStyle={{
+                    color: '#f7f7f7',
+                    marginLeft: '5vw',
+                }}
+            />
 
-            <NextButton onClick={handleNextMessage} >
-                Next
-            </NextButton>
+            
         </DialogBox>
     )
 }

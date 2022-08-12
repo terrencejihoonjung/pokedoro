@@ -1,9 +1,16 @@
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import useSound from 'use-sound';
+import pokemonNext from '../sounds/pokemonNext.mp3';
 import Dialog from "./Dialog";
+import PokemonForm from "./PokemonForm";
 
 function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
+    const [currentMessage, setCurrentMessage] = useState(0);
+    const [play] = useSound(pokemonNext);
     const navigate = useNavigate();
+    
     const messages = [
         `Hi ${user.username}! Welcome to Pokédoro!`,
         "Before I get you started, I want to help you choose your first pokémon!",
@@ -21,6 +28,15 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
         "Your new pokémon! Congratulations!"
     ]
 
+    function handleNextMessage() {
+        if (currentMessage < messages.length - 1) {
+            play()
+            setCurrentMessage(currentMessage + 1);
+        } else {
+            setCurrentMessage(0);
+        }
+    }
+
     if (hasPokemon) {
         navigate("/pokeboard");
     }
@@ -34,7 +50,8 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
             justifyContent:'center',
             position: 'relative'
         }}>
-            <Dialog messages={messages} />
+            <PokemonForm currentMessage={currentMessage} />
+            <Dialog messages={messages} handleNextMessage={handleNextMessage} currentMessage={currentMessage} />
         </Box>
     )
 }

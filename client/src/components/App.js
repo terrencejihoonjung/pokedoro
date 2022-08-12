@@ -39,9 +39,9 @@ function App() {
           {user ? 
           <>
             <Route path="/choose-pokemon" element={<ChoosePokemon user={user} hasPokemon={hasPokemon} setHasPokemon={setHasPokemon} />} />
-            <Route path="/pokeboard" element={<Pokeboard />} />
-            <Route path="/pokestore" element={<Pokestore />} />
-            <Route path="/profile" element={<Profile onLogout={setUser} />} />
+            <Route path="/pokeboard" element={<Pokeboard hasPokemon={hasPokemon} />} />
+            <Route path="/pokestore" element={<Pokestore hasPokemon={hasPokemon} />} />
+            <Route path="/profile" element={<Profile onLogout={setUser} hasPokemon={hasPokemon} />} />
           </> :
           <>
             <Route path="/" element={<Home />} />
