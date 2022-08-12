@@ -15,6 +15,7 @@ import Profile from "./Profile";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [hasPokemon, setHasPokemon] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,12 +33,12 @@ function App() {
 
   return (
       <Box>
-        <NavBar user={user} />
+        { (!user || (user && hasPokemon)) ? <NavBar user={user}/> : null }
     
         <Routes>
           {user ? 
           <>
-            <Route path="/choose-pokemon" element={<ChoosePokemon />} />
+            <Route path="/choose-pokemon" element={<ChoosePokemon user={user} hasPokemon={hasPokemon} setHasPokemon={setHasPokemon} />} />
             <Route path="/pokeboard" element={<Pokeboard />} />
             <Route path="/pokestore" element={<Pokestore />} />
             <Route path="/profile" element={<Profile onLogout={setUser} />} />
@@ -45,7 +46,7 @@ function App() {
           <>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login onLogin={setUser} />} />
-            <Route path="/signup" element={<Signup onLogin={setUser} />} />
+            <Route path="/signup" element={<Signup onLogin={setUser} hasPokemon={hasPokemon} />} />
             <Route path="/about" element={<About />} />
           </>
           }

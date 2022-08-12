@@ -5,6 +5,7 @@ class CreateTrainers < ActiveRecord::Migration[7.0]
       t.string :email
       t.string :password_digest
       t.text :bio
+      t.boolean :has_pokemon
 
       t.timestamps
     end

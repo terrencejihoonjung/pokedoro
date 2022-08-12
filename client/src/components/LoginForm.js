@@ -43,11 +43,12 @@ function LoginForm({ onLogin }) {
             borderRadius: '16px',
             mr: '15vw',
             mb: '12vh',
-            height: '35vh',
+            height: '45vh',
             width: '30vw',
-            boxShadow: 6
+            boxShadow: 6,
+            justifyContent:'center'
         }}>
-            <Avatar sx={{ mt: 4, mb: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ bgcolor: 'secondary.main' }}>
                 <CatchingPokemon sx={{
                     fontSize: 28,
                     color: "primary.main"
@@ -55,7 +56,7 @@ function LoginForm({ onLogin }) {
             </Avatar>
 
             <Box component="form" sx={{ p:4 }} onSubmit={handleLogin} >
-                <Grid container columnSpacing={2} rowSpacing={4} sx={{ justifyContent: 'center'}}>
+                <Grid container rowSpacing={4} sx={{ justifyContent: 'center'}}>
                     <Grid item xs={12} >
                         <TextField 
                             id="username"
@@ -78,26 +79,32 @@ function LoginForm({ onLogin }) {
                         />
                     </Grid>
 
-                    <Box>
+                    <Grid item xs={12}>
                         {errors.map(err => {
-                            return <Alert sx={{mt: 2, mb:1}} severity="error" key={err}>{err}</Alert>
+                            return <Alert size="small" sx={{mt:1, mb:1}} severity="error" key={err}>{err}</Alert>
                         })}
-                    </Box>
+                    </Grid>
 
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        sx={{ 
-                            mt: '8vh', width: '30%',
-                            '&:hover': {
-                                backgroundColor: 'thirdGreen.main',
-                                color: 'secondary.main'
-                            }
-                        }}  
+                    <Grid item xs={12} sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',}}
                     >
-                        Log In
-                    </Button>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            size="large"
+                            sx={{ 
+                                width: '30%',
+                                '&:hover': {
+                                    backgroundColor: 'thirdGreen.main',
+                                    color: 'secondary.main'
+                                }
+                            }}  
+                        >
+                            Log In
+                        </Button>
+                    </Grid>
 
                 </Grid>
             </Box>

@@ -14,6 +14,6 @@ class TrainersController < ApplicationController
     private
     
     def trainer_params
-        params.permit(:username, :password, :password_confirmation , :bio , :email )
+        params.permit(:username, :password, :password_confirmation , :bio , :email, :has_pokemon)
     end
 end

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CatchingPokemon } from '@mui/icons-material';
 
-function SignupForm({ onLogin }) {
+function SignupForm({ onLogin, hasPokemon }) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,7 +27,8 @@ function SignupForm({ onLogin }) {
                 password,
                 password_confirmation: passwordConfirmation,
                 bio: "",
-                email
+                email,
+                has_pokemon: hasPokemon
             })
         });
 
@@ -50,11 +51,12 @@ function SignupForm({ onLogin }) {
             borderRadius: '16px',
             mr: '15vw',
             mb: '12vh',
-            height: '50vh',
+            height: '70vh',
             width: '30vw',
-            boxShadow: 6
+            boxShadow: 6,
+            justifyContent: 'center'
         }}>
-            <Avatar sx={{ mt: 4, mb: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ bgcolor: 'secondary.main' }}>
                 <CatchingPokemon sx={{
                     fontSize: 28,
                     color: "primary.main"
@@ -62,7 +64,7 @@ function SignupForm({ onLogin }) {
             </Avatar>
 
             <Box component="form" sx={{ p:4 }} onSubmit={handleSignup}>
-                <Grid container columnSpacing={2} rowSpacing={4} sx={{ justifyContent: 'center'}}>
+                <Grid container rowSpacing={4} sx={{ justifyContent: 'center'}}>
                     <Grid item xs={12} >
                         <TextField 
                             id="username"
@@ -107,26 +109,33 @@ function SignupForm({ onLogin }) {
                         />
                     </Grid>
 
-                    <Box>
+                    <Grid item xs={12} >
                         {errors.map(err => {
-                            return <Alert sx={{mt: 2, mb:1}} severity="error" key={err}>{err}</Alert>
+                            return <Alert sx={{mt: 1, mb:1}} severity="error" key={err}>{err}</Alert>
                         })}
-                    </Box>
-
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        sx={{ 
-                            mt: '12vh', width: '30%',
-                            '&:hover': {
-                                backgroundColor: 'thirdGreen.main',
-                                color: 'secondary.main'
-                            }
-                        }}  
-                    >
-                        Sign up
-                    </Button>
+                    </Grid>
+                    
+                    <Grid item xs={12} sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            size="large"
+                            sx={{ 
+                                width: '30%',
+                                '&:hover': {
+                                    backgroundColor: 'thirdGreen.main',
+                                    color: 'secondary.main'
+                                }
+                            }}  
+                        >
+                            Sign up
+                        </Button>
+                    </Grid>
+                    
 
                 </Grid>
             </Box>
