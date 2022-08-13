@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pokemons
   resources :trainers, only: [:create, :show]
 
   get '/me', to: 'trainers#show'

@@ -10,10 +10,13 @@ export const theme = createTheme({
             main: '#f7f7f7'
         },
         thirdRed: {
-            main: '#e579a7'
+            main: '#e35b5f'
         },
         thirdGreen: {
             main: '#6bc29d'
+        },
+        thirdBlue: {
+            main: '#84cdce'
         },
 
         background: {

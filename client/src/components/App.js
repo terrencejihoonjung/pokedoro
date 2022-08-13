@@ -16,6 +16,7 @@ import Profile from "./Profile";
 function App() {
   const [user, setUser] = useState(null);
   const [hasPokemon, setHasPokemon] = useState(false);
+  const [pokemon, setPokemon] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
