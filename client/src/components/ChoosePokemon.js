@@ -27,7 +27,8 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
             "What would you like to name it?",
             "Perfect!",
             "Presenting...",
-            "Your new pokémon! Congratulations!"
+            "Your new pokémon! Congratulations!",
+            "Happy Studying!"
         ]
 
     // Starter Pokemon
@@ -44,7 +45,6 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
             .then(r => r.json())
             .then(pokemon => {
                 setStarterPokemon(starterPokemon => [...starterPokemon, pokemon])
-                console.log(pokemon)
             })
     }
     
@@ -65,6 +65,24 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
             })
         }
     }
+
+    function savePokemon() {
+        fetch("/pokemons", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: pokemonName,
+                height: chosenPokemon.height,
+                weight: chosenPokemon.weight, 
+                image: chosenPokemon.sprites.front_default,
+                type: chosenPokemon.types['0'].type.name,
+                base_experience: chosenPokemon.base_experience,
+                trainer_id: user.id
+            })
+        });
+    }
     
     function handleNextMessage() {
         if (currentMessage < messages.length - 1) {
@@ -76,6 +94,12 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
             }
             else if (currentMessage === 6 && Object.keys(chosenPokemon) === 0) {
                 return null;
+            }
+            else if (currentMessage === 10 && !pokemonName) {
+                return null;
+            }
+            else if (currentMessage === 11) {
+                savePokemon();
             }
             play();
             setCurrentMessage(currentMessage + 1); 
@@ -99,6 +123,7 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
         }}>
             <PokemonForm currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} play={play}
                 setChosenType={setChosenType}
+                chosenPokemon={chosenPokemon}
                 setChosenPokemon={setChosenPokemon}
                 starterPokemon={starterPokemon}
                 pokemonName={pokemonName}

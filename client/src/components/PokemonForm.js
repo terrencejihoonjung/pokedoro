@@ -1,8 +1,8 @@
-import { Box, Grid, IconButton, TextField, Paper } from "@mui/material";
+import { Box, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { Grass, Water, LocalFireDepartment } from '@mui/icons-material';
 import PokemonCard from "./PokemonCard";
 
-function PokemonForm({ currentMessage, setChosenType, setChosenPokemon, starterPokemon, pokemonName, setPokemonName, setCurrentMessage, play}) {
+function PokemonForm({ currentMessage, setChosenType, chosenPokemon, setChosenPokemon, starterPokemon, pokemonName, setPokemonName, setCurrentMessage, play}) {
 
     return (
         <Box sx={{width:'100vw', height:'74vh', display:'flex', justifyContent:'center', alignItem: 'center'}}>
@@ -69,7 +69,7 @@ function PokemonForm({ currentMessage, setChosenType, setChosenPokemon, starterP
 
             {currentMessage === 6 ? 
                 <Box sx={{margin:'auto'}}>
-                    <Grid container rowSpacing={18} columnSpacing={18} >
+                    <Grid container rowSpacing={18} >
                         {starterPokemon.map(pokemon => {
                             return <PokemonCard key={pokemon.name} 
                                 play={play} 
@@ -99,7 +99,27 @@ function PokemonForm({ currentMessage, setChosenType, setChosenPokemon, starterP
             : null}
 
             {currentMessage === 13 ?
-                'POKEMON'
+                <Box sx={{margin:'auto'}}>
+                    <Box>
+                        <Typography variant="h5" fontWeight="fontWeightBold">{pokemonName}</Typography>
+                        <Typography variant="h8" fontWeight="fontWeightBold">{chosenPokemon.name[0].toUpperCase() + chosenPokemon.name.slice(1)}</Typography>
+                        <Box component="img" src={chosenPokemon.sprites.front_default} sx={{
+                            animationDuration: '2s',
+                            animationIterationCount: 'infinite',
+                            animationName: 'bounce',
+                            animationTimingFunction: 'linear',
+                            '@keyframes bounce': {
+                                '0%':   { transform: 'translateY(0)' },
+                                '50%':  { transform: 'translateY(-5px)' },
+                                '100%': { transform: 'translateY(0)' }
+                            }
+                        }} />
+                        <Typography variant="h12">Height: {setChosenPokemon.height}</Typography>
+                        <Typography variant="h12">Weight: {setChosenPokemon.weight}</Typography>
+                        <Typography variant="h12">Type: {setChosenPokemon.types['0'].type.name}</Typography>
+                        <Typography variant="h12">Base Experience: {setChosenPokemon.base_experience}</Typography>
+                    </Box>
+                </Box>
             : null}
 
         </Box>
