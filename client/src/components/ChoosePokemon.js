@@ -77,7 +77,7 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
                 height: chosenPokemon.height,
                 weight: chosenPokemon.weight, 
                 image: chosenPokemon.sprites.front_default,
-                type: chosenPokemon.types['0'].type.name,
+                poketype: chosenPokemon.types['0'].type.name,
                 base_experience: chosenPokemon.base_experience,
                 trainer_id: user.id
             })
