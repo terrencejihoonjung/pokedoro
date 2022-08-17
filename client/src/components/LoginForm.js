@@ -27,7 +27,8 @@ function LoginForm({ onLogin }) {
         const trainer = await response.json();
         if (response.ok) {
             onLogin(trainer)
-            navigate("/choose-pokemon")
+            navigate("/pokeboard")
+            window.location.reload();
         } else {
             setErrors(trainer.errors)
         }

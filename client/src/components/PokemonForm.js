@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Box, Grid, IconButton, TextField, Typography, Paper } from "@mui/material";
 import { Grass, Water, LocalFireDepartment } from '@mui/icons-material';
 import PokemonCard from "./PokemonCard";
 
@@ -100,9 +100,9 @@ function PokemonForm({ currentMessage, setChosenType, chosenPokemon, setChosenPo
 
             {currentMessage === 13 ?
                 <Box sx={{margin:'auto'}}>
-                    <Box>
-                        <Typography variant="h5" fontWeight="fontWeightBold">{pokemonName}</Typography>
-                        <Typography variant="h8" fontWeight="fontWeightBold">{chosenPokemon.name[0].toUpperCase() + chosenPokemon.name.slice(1)}</Typography>
+                    <Paper sx={{p: 6 }}>
+                        <Typography sx={{display: 'block'}} variant="h5" fontWeight="fontWeightBold">{pokemonName[0].toUpperCase() + pokemonName.slice(1)}</Typography>
+                        <Typography sx={{display: 'block'}} variant="h8" fontWeight="fontWeightBold">{chosenPokemon.name[0].toUpperCase() + chosenPokemon.name.slice(1)}</Typography>
                         <Box component="img" src={chosenPokemon.sprites.front_default} sx={{
                             animationDuration: '2s',
                             animationIterationCount: 'infinite',
@@ -114,11 +114,11 @@ function PokemonForm({ currentMessage, setChosenType, chosenPokemon, setChosenPo
                                 '100%': { transform: 'translateY(0)' }
                             }
                         }} />
-                        <Typography variant="h12">Height: {setChosenPokemon.height}</Typography>
-                        <Typography variant="h12">Weight: {setChosenPokemon.weight}</Typography>
-                        <Typography variant="h12">Type: {setChosenPokemon.types['0'].type.name}</Typography>
-                        <Typography variant="h12">Base Experience: {setChosenPokemon.base_experience}</Typography>
-                    </Box>
+                        <Typography sx={{display: 'block'}} variant="h12">Height: {chosenPokemon.height}</Typography>
+                        <Typography sx={{display: 'block'}} variant="h12">Weight: {chosenPokemon.weight}</Typography>
+                        <Typography sx={{display: 'block'}} variant="h12">Type: {chosenPokemon.types['0'].type.name[0].toUpperCase() + chosenPokemon.types['0'].type.name.slice(1)}</Typography>
+                        <Typography sx={{display: 'block'}} variant="h12">Base Experience: {chosenPokemon.base_experience}</Typography>
+                    </Paper>
                 </Box>
             : null}
 

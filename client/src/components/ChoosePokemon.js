@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useSound from 'use-sound';
 import pokemonNext from '../sounds/pokemonNext.mp3';
+import pokemonCaught from '../sounds/pokemonCaught.mp3';
 import Dialog from "./Dialog";
 import PokemonForm from "./PokemonForm";
 
@@ -10,7 +11,12 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
     // State needed for dialogue
     const [currentMessage, setCurrentMessage] = useState(0);
     const [play] = useSound(pokemonNext);
+    const [playCaught] = useSound(pokemonCaught);
     const navigate = useNavigate();
+
+    if (hasPokemon) {
+        navigate("/pokeboard");
+    }
 
     // All dialogue messages
     const messages = [
@@ -46,6 +52,20 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
             .then(pokemon => {
                 setStarterPokemon(starterPokemon => [...starterPokemon, pokemon])
             })
+    }
+    
+    function nowHasPokemon() {
+        fetch(`/trainers/${user.id}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                has_pokemon: true
+            })
+        })
+            .then(r => r.json()) 
+            .then(trainer => setHasPokemon(trainer.has_pokemon))
     }
     
     function grabStarterPokemon() {
@@ -101,15 +121,14 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
             else if (currentMessage === 11) {
                 savePokemon();
             }
+            else if (currentMessage === 12) {
+                playCaught();
+            }
             play();
             setCurrentMessage(currentMessage + 1); 
         } else {
-            setCurrentMessage(0);
+            nowHasPokemon();
         }
-    }
-
-    if (hasPokemon) {
-        navigate("/pokeboard");
     }
 
     return (

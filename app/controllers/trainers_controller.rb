@@ -11,6 +11,12 @@ class TrainersController < ApplicationController
         render json: @current_trainer
     end
 
+    def update
+        trainer = Trainer.find(params[:id])
+        trainer.update(trainer_params)
+        render json: trainer, status: :ok
+    end
+
     private
     
     def trainer_params
