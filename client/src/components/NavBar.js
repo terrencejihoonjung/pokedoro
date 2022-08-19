@@ -3,11 +3,23 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { CatchingPokemon, Menu } from '@mui/icons-material';
 
-function NavBar({ user }) {
+function NavBar({ user, onLogout }) {
     const [open, setOpen] = useState(false);
 
     function handleMenu() {
         setOpen(open => !open)
+    }
+
+    async function handleLogout() {
+        const response = await fetch("/logout", {
+            method: "DELETE"
+        });
+
+        if (response.ok) {
+            setOpen(open => !open)
+            onLogout(null)
+            window.location.reload();
+        }
     }
 
     return (
@@ -67,6 +79,14 @@ function NavBar({ user }) {
                                             <ListItemText primary={'Profile'} sx={{color: 'primary.main' }} />
                                         </ListItem>
                                     </Link>
+                                </Grow>
+
+                                <Grow in={open} {...(open ? { timeout: 800 } : {timeout: 500})} >
+                                    
+                                    <ListItem button onClick={handleLogout} > 
+                                        <ListItemText primary={'Logout'} sx={{color: 'primary.main' }} />
+                                    </ListItem>
+                                    
                                 </Grow>
                             </>
                             :

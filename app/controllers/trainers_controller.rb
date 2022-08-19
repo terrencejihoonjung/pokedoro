@@ -7,6 +7,10 @@ class TrainersController < ApplicationController
         render json: trainer, status: :created
     end
 
+    def index
+        render json: Trainer.all
+    end
+
     def show
         render json: @current_trainer
     end

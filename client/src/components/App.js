@@ -16,6 +16,7 @@ import Profile from "./Profile";
 function App() {
   const [user, setUser] = useState(null);
   const [hasPokemon, setHasPokemon] = useState(false);
+  const [friends, setFriends] = useState([]);
   const [pokemon, setPokemon] = useState([]);
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ function App() {
 
   return (
       <Box>
-        { (!user || (user && hasPokemon)) ? <NavBar user={user}/> : null }
+        { (!user || (user && hasPokemon)) ? <NavBar user={user} onLogout={setUser} /> : null }
     
         <Routes>
           {user ? 
@@ -44,7 +45,7 @@ function App() {
             <Route path="/choose-pokemon" element={<ChoosePokemon user={user} hasPokemon={hasPokemon} setHasPokemon={setHasPokemon} />} />
             <Route path="/pokeboard" element={<Pokeboard hasPokemon={hasPokemon} />} />
             <Route path="/pokestore" element={<Pokestore hasPokemon={hasPokemon} />} />
-            <Route path="/profile" element={<Profile onLogout={setUser} hasPokemon={hasPokemon} />} />
+            <Route path="/profile" element={<Profile onLogout={setUser} user={user} hasPokemon={hasPokemon} friends={friends} setFriends={setFriends} />} />
           </> :
           <>
             <Route path="/" element={<Home />} />

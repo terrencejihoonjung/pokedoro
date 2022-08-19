@@ -15,7 +15,8 @@ function ChoosePokemon({ user, hasPokemon, setHasPokemon }) {
     const navigate = useNavigate();
 
     if (hasPokemon) {
-        navigate("/pokeboard");
+        navigate("/profile");
+        window.location.reload();
     }
 
     // All dialogue messages

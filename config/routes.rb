@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :pokemons, only: [:create]
-  resources :trainers, only: [:create, :show, :update]
+  resources :trainers, only: [:create, :index, :show, :update]
+  resources :friend_requests, only: [:create, :destroy]
 
   get '/me', to: 'trainers#show'
   delete '/logout', to: 'sessions#destroy'
