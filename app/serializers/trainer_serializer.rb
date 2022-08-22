@@ -2,6 +2,6 @@ class TrainerSerializer < ActiveModel::Serializer
   attributes :id, :username, :email, :bio, :has_pokemon
 
   has_many :pokemons
-  has_many :receivers
-  has_many :requestors
+  has_many :friend_requests_as_requestor
+  has_many :friend_requests_as_receiver
 end

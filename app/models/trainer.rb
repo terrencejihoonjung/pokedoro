@@ -6,18 +6,15 @@ class Trainer < ApplicationRecord
         foreign_key: :requestor_id,
         class_name: "FriendRequest",
         dependent: :destroy
-    has_many :requestors, through: :friend_requests_as_requestor
     
     has_many :friend_requests_as_receiver,
         foreign_key: :receiver_id,
         class_name: "FriendRequest",
         dependent: :destroy
-    has_many :receivers, through: :friend_requests_as_receiver
 
     has_many :friendships, ->(trainer) {where('friend_a_id: ? OR friend_b_id: ?', trainer.id, trainer.id)},
         class_name: "Friendship",
         dependent: :destroy
-    
 
     validates :username, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true

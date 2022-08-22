@@ -1,6 +1,6 @@
 import { Box, Avatar, Typography, Grid, Paper, Button, Modal, TextField, List, ListItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FriendCard from "./FriendCard";
 
 function Profile({ user, hasPokemon, friends, setFriends }) {
@@ -8,13 +8,27 @@ function Profile({ user, hasPokemon, friends, setFriends }) {
     const [open, setOpen] =useState(false);
     const [friendSearch, setFriendSearch] = useState("");
     const [allTrainers, setAllTrainers] = useState([]);
+    const [friendRequests, setFriendRequests] = useState([]);
 
     if (!hasPokemon) {
         navigate("/choose-pokemon")
     }
 
+    useEffect(() => {
+        fetch("/friend_requests")
+          .then(r => {
+            if (r.ok) {
+              r.json().then(requests => setFriendRequests(requests))
+            }
+          })
+      }, [])
+
     function handleSearch(e) {
         setFriendSearch(e.target.value);
+
+        if (e.target.value === "") {
+            return;
+        }
         
         fetch("/trainers").then(r => r.json()).then(trainers => setAllTrainers(trainers))
     }
@@ -22,6 +36,14 @@ function Profile({ user, hasPokemon, friends, setFriends }) {
     const filteredTrainers = allTrainers.filter(trainer => {
         if (trainer.username.toLowerCase().startsWith(friendSearch.toLowerCase()) && user.id !== trainer.id) {
             return true
+        }
+    })
+
+    const filteredFriendRequests = friendRequests.filter(request => {
+        if (request.receiver_id === user.id) {
+            return true;
+        } else {
+            return false;
         }
     })
 
@@ -38,9 +60,31 @@ function Profile({ user, hasPokemon, friends, setFriends }) {
         });
     }
 
+    function handleAcceptRequest(request) {
+        // delete friend request
+        fetch(`/friend_requests/${request.id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        // create friendship between users 
+        fetch("/friendships", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                friend_a_id: user.id,
+                friend_b_id: request.requestor.id
+            })
+        })
+    }
+
     function sentRequest() {
-        user.requestors.forEach(requestor => {
-            if (requestor.id === user.id) {
+        user.friend_requests_as_requestor.forEach(received => {
+            if (received.id === user.id) {
                 return true
             }
         })
@@ -74,19 +118,27 @@ function Profile({ user, hasPokemon, friends, setFriends }) {
                         </Typography>
                     </Box>
 
-                    <Paper sx={{height: 'auto', width: '20vw'}}>
+                    <Paper sx={{height: 'auto', width: '30vw'}}>
                         <Box sx={{ p: 2, }}>
                             <Typography variant="h5" sx={{m:1}}>
                                 Friend Requests
                             </Typography>
-                            {/* <List>
-                               {user.friend_requests_as_receiver.map(request => {
-                                return <ListItem>{request}</ListItem>
+
+                            <List>
+                               {filteredFriendRequests.map(request => {
+                                return (
+                                    <ListItem sx={{justifyContent: 'space-between'}}>
+                                        <Typography variant="h7">
+                                            {request.requestor.username}
+                                        </Typography>
+
+                                        <Button variant="contained" size="small" onClick={() => handleAcceptRequest(request)} >
+                                            Accept
+                                        </Button>
+                                    </ListItem>
+                                        )
                                 })} 
-                            </List> */}
-                            <Button sx={{m:1}} onClick={() => console.log(user)}>
-                                Friend Requests
-                            </Button>
+                            </List>
                             
                         </Box>
                     </Paper>
@@ -102,7 +154,7 @@ function Profile({ user, hasPokemon, friends, setFriends }) {
                         </Box>
                     </Paper>
 
-                    <Paper sx={{height: '25vh', m:2}}>
+                    <Paper sx={{height: 'auto', m:2}}>
                         <Box sx={{ p: 2, }}>
                             <Typography variant="h5" sx={{m:1}}>
                                 Friends

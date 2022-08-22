@@ -2,11 +2,11 @@ import { Paper, Avatar, Typography } from "@mui/material";
 
 function FriendCard({ user }) {
     return (
-        <Paper sx={{height: 'auto', width: '7vw', textAlign:'center', p:2, mr: 2}}>
+        <Paper sx={{height: 'auto', width: '7vw', textAlign:'center', pt: 1, pb:1, mr: 2}}>
             <Avatar
                 alt={user.username}
                 src={""}
-                sx={{ width: 100, height: 100, margin:'auto', mb: '1vh' }}
+                sx={{ width: 90, height: 90, margin:'auto', mb: '1vh' }}
             >
                 {user.username[0]}
             </Avatar>

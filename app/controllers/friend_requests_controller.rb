@@ -1,4 +1,7 @@
 class FriendRequestsController < ApplicationController
+    def index
+        render json: FriendRequest.all, status: :ok
+    end
 
     def create
         friend_request = FriendRequest.create!(requestor_id: params[:requestor_id], receiver_id: params[:receiver_id])
