@@ -1,19 +1,27 @@
-import { Paper, Avatar, Typography } from "@mui/material";
+import { Paper, Avatar, Typography, Box, IconButton } from "@mui/material";
+import { Delete } from '@mui/icons-material';
 
-function FriendCard({ user }) {
+function FriendCard({ friend, handleDeleteFriend }) {
     return (
         <Paper sx={{height: 'auto', width: '7vw', textAlign:'center', pt: 1, pb:1, mr: 2}}>
             <Avatar
-                alt={user.username}
+                alt={friend.username}
                 src={""}
-                sx={{ width: 90, height: 90, margin:'auto', mb: '1vh' }}
+                sx={{ width: 90, height: 90, margin:'auto', mb: '1vh'}}
             >
-                {user.username[0]}
+                {friend.username[0]}
             </Avatar>
             
-            <Typography variant="h8">
-                {user.username}
-            </Typography>
+            <Box>
+                <Typography variant="h8">
+                    {friend.username}
+                </Typography>
+
+                <IconButton onClick={() => handleDeleteFriend}>
+                    <Delete size="small" />
+                </IconButton>
+            </Box>
+            
         </Paper>
     )
 }

@@ -27,10 +27,17 @@ function App() {
           r.json().then(trainer => {
             setUser(trainer)
             setHasPokemon(trainer.has_pokemon)
-            
+            setPokemon(trainer.pokemons)
           })
         } else {
           navigate("/")
+        }
+      })
+      fetch("/friendships").then(r => {
+        if (r.ok) {
+          r.json().then(friendships => {
+            setFriends(friendships)
+          })
         }
       })
   }, [])
@@ -44,8 +51,15 @@ function App() {
           <>
             <Route path="/choose-pokemon" element={<ChoosePokemon user={user} hasPokemon={hasPokemon} setHasPokemon={setHasPokemon} />} />
             <Route path="/pokeboard" element={<Pokeboard hasPokemon={hasPokemon} />} />
-            <Route path="/pokestore" element={<Pokestore hasPokemon={hasPokemon} />} />
-            <Route path="/profile" element={<Profile onLogout={setUser} user={user} hasPokemon={hasPokemon} friends={friends} setFriends={setFriends} />} />
+            <Route path="/pokestore" element={<Pokestore hasPokemon={hasPokemon} setPokemon={setPokemon} user={user} />} />
+            <Route path="/profile" element={<Profile 
+              onLogout={setUser} 
+              user={user} 
+              hasPokemon={hasPokemon} 
+              friends={friends} 
+              setFriends={setFriends} 
+              pokemon={pokemon}
+            />} />
           </> :
           <>
             <Route path="/" element={<Home />} />
