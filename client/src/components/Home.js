@@ -45,11 +45,6 @@ function Home() {
                 </Box>
             </HomeBoxWhite>
 
-            <HomeBoxBlack>
-                <Typography variant="h4" fontWeight="fontWeightBold">This is box number 2!</Typography>
-            </HomeBoxBlack>
-
-            <HomeBoxWhite><Typography variant="h4" fontWeight="fontWeightBold">This is box number 3!</Typography></HomeBoxWhite>
         </Stack>
     )
 }
