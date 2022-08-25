@@ -4,13 +4,15 @@ import { useState, useEffect } from "react";
 import FriendCard from "./FriendCard";
 import PokemonProfileCard from "./PokemonProfileCard"; 
 
-function Profile({ user, hasPokemon, pokemon, friends, setFriends }) {
+function Profile({ user, hasPokemon, pokemon, friends }) {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [friendSearch, setFriendSearch] = useState("");
     const [allTrainers, setAllTrainers] = useState([]);
     const [friendRequests, setFriendRequests] = useState([]);
     const [errors, setErrors] = useState([]);
+    const [editMode, setEditMode] = useState(false);
+    const [newBio, setNewBio] = useState("");
 
     if (!hasPokemon) {
         navigate("/choose-pokemon")
@@ -141,6 +143,18 @@ function Profile({ user, hasPokemon, pokemon, friends, setFriends }) {
         setAllTrainers([]);
     }
 
+    function handleEditBio() {
+        fetch(`/trainers/${user.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                bio: newBio
+            })
+        })
+    }
+
     return (
         <Box>
             <Grid container sx={{ p: 12 }} >
@@ -197,6 +211,14 @@ function Profile({ user, hasPokemon, pokemon, friends, setFriends }) {
                             <Typography variant="h5">
                                 About Me
                             </Typography>
+                            <Button variant="contained" onClick={() => setEditMode(editMode => !editMode)} >Edit</Button>
+                            <Typography sx={{display:'block'}} variant="h8">{user.bio}</Typography>
+                            {editMode ? 
+                                <Box>
+                                    <TextField variant="outlined" fullWidth value={newBio} onChange={e => setNewBio(e.target.value)} />
+                                    <Button variant="contained" onClick={() => handleEditBio()}>Save</Button>
+                                </Box>
+                            : null}
                         </Box>
                     </Paper>
 
