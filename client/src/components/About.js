@@ -13,7 +13,7 @@ function About() {
             <Typography variant="h3">
                 LinkedIn
             </Typography>
-            <Link href="https://www.linkedin.com/in/terrencejung/">Linkedin</Link>
+            <Link href="https://www.linkedin.com/in/terrencejung/">terrencejung</Link>
         </Box>
         
     )
