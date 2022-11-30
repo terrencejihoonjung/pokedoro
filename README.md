@@ -1,24 +1,42 @@
-# README
+# “Pokedoro” Personal Study Tool
+Personalized study application where users can complete study sessions and obtain virtual pokemon
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## User Stories
 
-Things you may want to cover:
+### The user can...
 
-* Ruby version
+* Login to their account or signup and create a new account
+* Walk through a guided series of messages and choose their starter pokemon
+* Customize their profile page
+* Catch new pokemon in the pokestore
 
-* System dependencies
+![Home Page](https://github.com/terrencejihoonjung/pokedoro/blob/main/public/demo/home.png?raw=true)
+![Login Page](https://github.com/terrencejihoonjung/pokedoro/blob/main/public/demo/login.png?raw=true)
+![Signup Page](https://github.com/terrencejihoonjung/pokedoro/blob/main/public/demo/signup.png?raw=true)
+![Profile Page](https://github.com/terrencejihoonjung/pokedoro/blob/main/public/demo/profile.png?raw=true)
+![Pokestore](https://github.com/terrencejihoonjung/pokedoro/blob/main/public/demo/pokestore.png?raw=true)
+![Timer](https://github.com/terrencejihoonjung/pokedoro/blob/main/public/demo/timer.png?raw=true)
 
-* Configuration
+## Technologies
 
-* Database creation
+Languages:
+* Javascript
+* CSS
+* HTML
+* Ruby
 
-* Database initialization
+Frameworks:
+* React.js
+* Material UI
+* Ruby on Rails
+* Active Record
 
-* How to run the test suite
+## External API
 
-* Services (job queues, cache servers, search engines, etc.)
+In this app, I utilized the Poke API using a ruby wrapper to randomly generate and search pokemon in the application.
 
-* Deployment instructions
+## Contact
 
-* ...
+#### Terrence Jung
+* [LinkedIn:] (https://www.linkedin.com/in/terrencejung/)
+* [GitHub:] (https://github.com/terrencejihoonjung)

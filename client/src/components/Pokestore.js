@@ -87,11 +87,11 @@ function Pokestore({ user, hasPokemon, setPokemon }) {
                 <Grid item xs={12}>
                     <Paper sx={{
                         p:3,
-                        width: '85vw', height: '40vh',
+                        width: '85vw', height: '60vh',
                         borderRadius:'16px'
                     }}>
                         <Typography variant="h4" fontWeight="fontWeightBold">Featured</Typography>
-                        <Box sx={{display:'flex', gap:'2vw', overflow:'scroll', overflowY: 'hidden', height:'auto', width:'auto'}}>
+                        <Box sx={{display:'flex', gap:'2vw', overflow:'scroll', overflowY: 'scroll', height:'auto', width:'auto'}}>
                             {featuredPokemon.map(pokemon => {
                                 return <PokemonFeatureCard key={pokemon.id} pokemon={pokemon} handleAddPokemon={handleAddPokemon} />
                             })}

@@ -2,7 +2,7 @@ import { Box, Typography, Paper, Button } from "@mui/material";
 
 function PokemonFeatureCard({ pokemon, handleAddPokemon }) {
     return (
-        <Paper sx={{p:1, width: 'auto', height:'auto', p:6}}>
+        <Paper sx={{p:1, width: '15vw', height:'50vh', p:6}}>
             <Typography sx={{display: 'block'}} variant="h5" fontWeight="fontWeightBold">{pokemon.name}</Typography>
             <Box component="img" src={pokemon.sprites.front_default} sx={{
                 animationDuration: '2s',
